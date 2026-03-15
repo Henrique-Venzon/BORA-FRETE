@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // ================================================================
 // CONSTANTES DO SISTEMA
 // ================================================================
-define('BASE_URL', 'http://localhost:8000');
+define('BASE_URL', 'http://localhost');
 define('SITE_NAME', 'FreteBras');
 define('SITE_DESCRIPTION', 'Sistema de Gestão Logística');
 define('SITE_VERSION', '1.0.0');
