@@ -1,0 +1,81 @@
+# BORAFRETE - Apache Configuration
+
+# Habilitar Rewrite Engine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /borafrete/
+
+    # Redirecionar para HTTPS (se disponível)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Remover trailing slash
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+</IfModule>
+
+# Segurança - Bloquear acesso a arquivos sensíveis
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Bloquear acesso direto a arquivos de configuração
+<FilesMatch "(config\.php|\.env)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Configurações de segurança de cabeçalhos
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Prevenir MIME sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # XSS Protection
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Referrer Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Compressão GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache de arquivos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Imagens
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+
+    # CSS e JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+
+    # Fontes
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Configurações de upload
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Página de erro customizada (opcional)
+# ErrorDocument 404 /borafrete/404.php
+# ErrorDocument 500 /borafrete/500.php

@@ -1,0 +1,233 @@
+═══════════════════════════════════════════════════════════════
+  🔄 BORAFRETE - ARQUIVOS ADICIONADOS E CORREÇÕES
+═══════════════════════════════════════════════════════════════
+
+📋 NOVOS ARQUIVOS CRIADOS
+───────────────────────────────────────────────────────────────
+
+✅ PÁGINAS:
+   - views/cadastro.php (Cadastro de usuário)
+   - views/recuperar-senha.php (Solicitar recuperação)
+   - views/redefinir-senha.php (Redefinir senha)
+
+✅ PROCESSAMENTO:
+   - processamento/salvar_usuario.php (Salvar novo usuário)
+   - processamento/enviar_recuperacao.php (Enviar email)
+   - processamento/processar_redefinicao.php (Redefinir senha)
+
+✅ BIBLIOTECA:
+   - lib/EmailHelper.php (Helper de envio de email)
+
+✅ CONFIGURAÇÕES:
+   - config/config.php (ATUALIZADO com configurações SMTP)
+
+
+🔧 CORREÇÕES APLICADAS
+───────────────────────────────────────────────────────────────
+
+✅ Login corrigido com logs de debug
+✅ Sistema de recuperação de senha via email
+✅ Configurações SMTP adicionadas
+✅ Tabela password_resets adicionada ao SQL
+
+
+📧 CONFIGURAÇÕES DE EMAIL
+───────────────────────────────────────────────────────────────
+
+As seguintes configurações foram adicionadas ao config.php:
+
+MAIL_HOST: smtp.hostinger.com
+MAIL_PORT: 587
+MAIL_USER: informativos@tac.creatertools.com
+MAIL_PASS: Creater@2026
+MAIL_FROM: informativos@tac.creatertools.com
+MAIL_FROM_NAME: BoraFrete - TAC Corporation
+
+
+🗄️ ATUALIZAÇÃO DO BANCO DE DADOS
+───────────────────────────────────────────────────────────────
+
+IMPORTANTE: Execute o SQL abaixo se você já tinha o banco criado:
+
+```sql
+USE borafrete;
+
+CREATE TABLE IF NOT EXISTS password_resets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    token VARCHAR(64) NOT NULL,
+    expiracao DATETIME NOT NULL,
+    usado BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    INDEX idx_token (token),
+    INDEX idx_expiracao (expiracao),
+    INDEX idx_usado (usado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+OU reimporte o arquivo database.sql completo (recomendado).
+
+
+🔐 TESTANDO O LOGIN
+───────────────────────────────────────────────────────────────
+
+1. Acesse: http://localhost/borafrete/
+
+2. Usuários de teste:
+   Email: motorista@borafrete.com
+   Senha: 123456
+
+   Email: transportadora@borafrete.com
+   Senha: 123456
+
+3. Se não conseguir logar, verifique:
+   ✓ Banco de dados criado e importado
+   ✓ Apache e MySQL rodando
+   ✓ BASE_URL correto em config/config.php
+   ✓ Logs de erro em: C:\xampp\apache\logs\error.log
+
+
+📝 TESTANDO CADASTRO
+───────────────────────────────────────────────────────────────
+
+1. Clique em "Criar uma conta" na tela de login
+
+2. Preencha:
+   - Tipo de Perfil
+   - Nome/Razão Social
+   - Documento (CPF/CNPJ)
+   - Email
+   - Telefone
+   - Senha (mínimo 6 caracteres)
+
+3. Se for motorista, marque MOPP e categorias CNH
+
+4. Clique em "Criar Conta"
+
+5. Você será logado automaticamente!
+
+
+🔄 TESTANDO RECUPERAÇÃO DE SENHA
+───────────────────────────────────────────────────────────────
+
+1. Na tela de login, clique em "Esqueceu a senha?"
+
+2. Digite seu email cadastrado
+
+3. Clique em "Enviar Link de Recuperação"
+
+4. IMPORTANTE: Como estamos usando SMTP real, você deve:
+   - Verificar sua caixa de email
+   - Procurar email de "BoraFrete - TAC Corporation"
+   - Clicar no link de recuperação
+   - Definir nova senha
+
+5. O link expira em 1 hora
+
+
+⚠️ CONFIGURAÇÃO DE EMAIL
+───────────────────────────────────────────────────────────────
+
+MÉTODO 1: SMTP Real (RECOMENDADO)
+Já configurado com Hostinger:
+- Emails serão enviados de verdade
+- Funciona em produção
+- Usuário receberá email real
+
+MÉTODO 2: Apenas Local (Desenvolvimento)
+Se quiser apenas testar sem enviar emails:
+
+1. Edite lib/EmailHelper.php
+2. Comente o código de envio
+3. Use logs em vez de enviar
+
+MÉTODO 3: MailHog (Docker)
+Para testar emails localmente sem enviar:
+- Use MailHog para capturar emails
+- Configure SMTP para localhost:1025
+
+
+🐛 LOGS DE DEBUG
+───────────────────────────────────────────────────────────────
+
+O sistema agora gera logs detalhados em:
+
+Windows (XAMPP):
+C:\xampp\apache\logs\error.log
+
+Linux:
+/var/log/apache2/error.log
+
+Os logs incluem:
+✓ Tentativas de login (sucesso/falha)
+✓ Emails não encontrados
+✓ Senhas incorretas
+✓ Erros de envio de email
+✓ Erros de banco de dados
+
+
+📂 ESTRUTURA ATUALIZADA
+───────────────────────────────────────────────────────────────
+
+borafrete/
+├── lib/
+│   └── EmailHelper.php          ← NOVO
+├── views/
+│   ├── cadastro.php             ← NOVO
+│   ├── recuperar-senha.php      ← NOVO
+│   └── redefinir-senha.php      ← NOVO
+├── processamento/
+│   ├── salvar_usuario.php       ← NOVO
+│   ├── enviar_recuperacao.php   ← NOVO
+│   └── processar_redefinicao.php ← NOVO
+├── config/
+│   └── config.php               ← ATUALIZADO
+└── database.sql                  ← ATUALIZADO
+
+
+✅ FUNCIONALIDADES ADICIONADAS
+───────────────────────────────────────────────────────────────
+
+✅ Cadastro completo de usuários
+✅ Validação de CPF/CNPJ
+✅ Validação de email duplicado
+✅ Auto-login após cadastro
+✅ Recuperação de senha via email
+✅ Token de recuperação com expiração (1 hora)
+✅ Emails HTML profissionais
+✅ Sistema de logs detalhado
+✅ Máscaras de formatação
+✅ Validação de senhas
+
+
+🔒 SEGURANÇA
+───────────────────────────────────────────────────────────────
+
+✅ Senhas sempre criptografadas (password_hash)
+✅ Tokens únicos e seguros (random_bytes)
+✅ Expiração de tokens de recuperação
+✅ Validação server-side completa
+✅ Proteção contra SQL Injection (PDO)
+✅ Sanitização de dados
+✅ Emails não revelam se usuário existe
+
+
+🚀 PRÓXIMOS PASSOS
+───────────────────────────────────────────────────────────────
+
+1. Importe o database.sql atualizado
+2. Teste o login com usuários de teste
+3. Crie uma nova conta
+4. Teste recuperação de senha
+5. Verifique os emails enviados
+6. Consulte logs em caso de erro
+
+
+═══════════════════════════════════════════════════════════════
+
+  Sistema completo e funcional!
+  Todas as páginas faltantes foram criadas.
+  Sistema de email configurado e pronto.
+
+═══════════════════════════════════════════════════════════════

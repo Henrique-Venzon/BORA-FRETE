@@ -1,0 +1,195 @@
+═══════════════════════════════════════════════════════════════
+  🚛 BORAFRETE - GUIA DE INSTALAÇÃO RÁPIDA
+═══════════════════════════════════════════════════════════════
+
+📋 PASSO 1: PREPARAR O AMBIENTE
+───────────────────────────────────────────────────────────────
+
+1. Instale o XAMPP (ou WAMP/MAMP)
+   Download: https://www.apachefriends.org/
+
+2. Inicie o Apache e MySQL no painel de controle do XAMPP
+
+
+📁 PASSO 2: COPIAR ARQUIVOS
+───────────────────────────────────────────────────────────────
+
+1. Copie a pasta "borafrete" para:
+
+   XAMPP Windows: C:\xampp\htdocs\borafrete\
+   XAMPP Linux:   /opt/lampp/htdocs/borafrete/
+   WAMP:          C:\wamp64\www\borafrete\
+   MAMP:          /Applications/MAMP/htdocs/borafrete/
+
+
+🗄️ PASSO 3: CRIAR BANCO DE DADOS
+───────────────────────────────────────────────────────────────
+
+1. Acesse: http://localhost/phpmyadmin
+
+2. Clique em "Novo" (ou "New")
+
+3. Crie um banco chamado: borafrete
+   - Collation: utf8mb4_unicode_ci
+
+4. Clique no banco "borafrete"
+
+5. Vá na aba "Importar" (ou "Import")
+
+6. Escolha o arquivo: database.sql (na raiz do projeto)
+
+7. Clique em "Executar" (ou "Go")
+
+8. Aguarde a mensagem de sucesso!
+
+
+⚙️ PASSO 4: CONFIGURAR O SISTEMA
+───────────────────────────────────────────────────────────────
+
+1. Abra o arquivo: config/config.php
+
+2. Ajuste a linha do BASE_URL conforme sua instalação:
+
+   define('BASE_URL', 'http://localhost/borafrete/');
+
+   IMPORTANTE: Mantenha a barra (/) no final!
+
+3. Se necessário, ajuste usuário/senha do banco:
+
+   define('DB_USER', 'root');
+   define('DB_PASS', '');
+
+
+🚀 PASSO 5: ACESSAR O SISTEMA
+───────────────────────────────────────────────────────────────
+
+1. Abra seu navegador
+
+2. Acesse: http://localhost/borafrete/
+
+3. Use um dos logins de teste:
+
+   ┌──────────────────────────────────────────────────┐
+   │ MOTORISTA:                                        │
+   │ Email: motorista@borafrete.com                   │
+   │ Senha: 123456                                    │
+   └──────────────────────────────────────────────────┘
+
+   ┌──────────────────────────────────────────────────┐
+   │ TRANSPORTADORA:                                   │
+   │ Email: transportadora@borafrete.com              │
+   │ Senha: 123456                                    │
+   └──────────────────────────────────────────────────┘
+
+
+✅ PRONTO! SISTEMA INSTALADO COM SUCESSO!
+───────────────────────────────────────────────────────────────
+
+
+🐛 PROBLEMAS COMUNS
+═══════════════════════════════════════════════════════════════
+
+❌ Erro: "Erro na conexão com o banco de dados"
+   ✅ Solução:
+      - Certifique que o MySQL está rodando
+      - Verifique config/config.php (usuário/senha)
+      - Confirme que o banco "borafrete" existe
+
+
+❌ Página em branco ou erro 404
+   ✅ Solução:
+      - Verifique se copiou para a pasta correta
+      - Confirme a BASE_URL em config/config.php
+      - Reinicie o Apache
+
+
+❌ Upload de imagens não funciona
+   ✅ Solução:
+      - Dê permissão de escrita na pasta public/uploads/
+      - Windows: Botão direito > Propriedades > Segurança
+      - Linux/Mac: chmod -R 755 public/uploads/
+
+
+❌ API IBGE não carrega estados/cidades
+   ✅ Solução:
+      - Verifique sua conexão com internet
+      - Abra o Console do navegador (F12) para ver erros
+      - A API é pública, não precisa de token
+
+
+❌ Erro: "Call to undefined function password_hash"
+   ✅ Solução:
+      - Atualize o PHP para versão 7.4 ou superior
+      - No XAMPP: baixe versão mais recente
+
+
+═══════════════════════════════════════════════════════════════
+  📚 ESTRUTURA DO PROJETO
+═══════════════════════════════════════════════════════════════
+
+borafrete/
+├── config/              → Configurações do sistema
+├── public/              → Arquivos públicos (CSS, JS, uploads)
+├── views/               → Páginas do sistema
+├── processamento/       → Lógica de processamento
+├── database.sql         → Banco de dados completo
+└── index.php            → Página de login
+
+
+═══════════════════════════════════════════════════════════════
+  🎯 FUNCIONALIDADES PRINCIPAIS
+═══════════════════════════════════════════════════════════════
+
+✅ Sistema de Login Seguro
+✅ Dashboard com Veículos Cadastrados
+✅ Cadastro de Veículos (com lógica de placas)
+✅ Cadastro de Ofertas de Frete
+✅ Integração com API IBGE (Estados e Cidades)
+✅ Perfil de Usuário Editável
+✅ Design Glassmorphism Moderno
+✅ Toggle de Disponibilidade de Veículo
+✅ Upload de Fotos de Veículos
+
+
+═══════════════════════════════════════════════════════════════
+  🔐 SEGURANÇA IMPLEMENTADA
+═══════════════════════════════════════════════════════════════
+
+✅ Senhas com password_hash (bcrypt)
+✅ PDO com Prepared Statements (anti SQL Injection)
+✅ Sanitização de dados (htmlspecialchars)
+✅ Proteção de sessões
+✅ Validação de formulários (client + server)
+
+
+═══════════════════════════════════════════════════════════════
+  📱 TESTAR FUNCIONALIDADES
+═══════════════════════════════════════════════════════════════
+
+1. Faça login como motorista
+2. Cadastre um novo veículo
+3. Teste a lógica de placas:
+   - Van/Fiorino: 1 placa (sem carroceria)
+   - Carreta: 2 placas
+   - Rodotrem: 3 placas
+4. Marque o veículo como disponível/indisponível
+5. Cadastre uma oferta de frete
+6. Teste a API IBGE selecionando estado e cidade
+7. Edite seu perfil
+
+
+═══════════════════════════════════════════════════════════════
+  🆘 SUPORTE
+═══════════════════════════════════════════════════════════════
+
+📖 Leia o README.md para documentação completa
+💻 Todo código possui comentários explicativos
+🐛 Verifique o console do navegador (F12) para erros JS
+
+
+═══════════════════════════════════════════════════════════════
+
+  Desenvolvido com ❤️ em PHP puro
+  Sistema modular, profissional e seguro!
+
+═══════════════════════════════════════════════════════════════
