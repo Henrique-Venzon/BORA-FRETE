@@ -23,7 +23,7 @@ $flashMessage = getFlashMessage();
 </head>
 <body class="login-page">
 
-    <div class="login-container">
+    <div class="login-container cadastro-container">
 
         <!-- LADO ESQUERDO - Informações -->
         <div class="login-left">
@@ -61,8 +61,8 @@ $flashMessage = getFlashMessage();
         </div>
 
         <!-- LADO DIREITO - Formulário de Cadastro -->
-        <div class="login-right">
-            <div class="login-form-container" style="max-width: 500px;">
+        <div class="login-right" style="overflow-y: auto; max-height: 90vh;">
+            <div class="login-form-container" style="max-width: 550px; padding: 30px 10px;">
 
                 <div class="login-logo">
                     <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,7 +80,7 @@ $flashMessage = getFlashMessage();
                     </div>
                 <?php endif; ?>
 
-                <form action="<?php echo BASE_URL; ?>processamento/salvar_usuario.php" method="POST" class="login-form" id="formCadastro">
+                <form action="<?php echo BASE_URL; ?>processamento/salvar_usuario.php" method="POST" class="login-form" id="formCadastro" style="gap: 16px;">
 
                     <div class="form-group">
                         <label for="tipo_perfil">Tipo de Perfil *</label>
@@ -97,18 +97,20 @@ $flashMessage = getFlashMessage();
                         <input type="text" name="nome_razao_social" id="nome_razao_social" required placeholder="Digite seu nome completo">
                     </div>
 
-                    <div class="form-group">
-                        <label for="documento_tipo">Tipo de Documento *</label>
-                        <select name="documento_tipo" id="documento_tipo" required onchange="handleDocumentoChange()">
-                            <option value="">Selecione...</option>
-                            <option value="cpf">CPF</option>
-                            <option value="cnpj">CNPJ</option>
-                        </select>
-                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="documento_tipo">Tipo de Documento *</label>
+                            <select name="documento_tipo" id="documento_tipo" required onchange="handleDocumentoChange()">
+                                <option value="">Selecione...</option>
+                                <option value="cpf">CPF</option>
+                                <option value="cnpj">CNPJ</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="documento_numero" id="labelDocumento">Número do Documento *</label>
-                        <input type="text" name="documento_numero" id="documento_numero" required placeholder="000.000.000-00">
+                        <div class="form-group">
+                            <label for="documento_numero" id="labelDocumento">Número do Documento *</label>
+                            <input type="text" name="documento_numero" id="documento_numero" required placeholder="000.000.000-00">
+                        </div>
                     </div>
 
                     <div class="form-group" id="ie-group" style="display: none;">
@@ -116,24 +118,28 @@ $flashMessage = getFlashMessage();
                         <input type="text" name="ie" id="ie" placeholder="000.000.000.000">
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">E-mail *</label>
-                        <input type="email" name="email" id="email" required placeholder="seu@email.com">
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" name="email" id="email" required placeholder="seu@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefone">Telefone *</label>
+                            <input type="text" name="telefone" id="telefone" required placeholder="(00) 00000-0000">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="telefone">Telefone *</label>
-                        <input type="text" name="telefone" id="telefone" required placeholder="(00) 00000-0000">
-                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="senha">Senha *</label>
+                            <input type="password" name="senha" id="senha" required placeholder="Mínimo 6 caracteres" minlength="6">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="senha">Senha *</label>
-                        <input type="password" name="senha" id="senha" required placeholder="Mínimo 6 caracteres" minlength="6">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirmar_senha">Confirmar Senha *</label>
-                        <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Digite a senha novamente" minlength="6">
+                        <div class="form-group">
+                            <label for="confirmar_senha">Confirmar Senha *</label>
+                            <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Digite a senha novamente" minlength="6">
+                        </div>
                     </div>
 
                     <!-- Campos específicos para motorista -->
@@ -178,7 +184,11 @@ $flashMessage = getFlashMessage();
 
     </div>
 
+    <script>
+        const BASE_URL = '<?php echo BASE_URL; ?>';
+    </script>
     <script src="<?php echo BASE_URL; ?>public/js/main.js"></script>
+    <script src="<?php echo BASE_URL; ?>public/js/validacao.js"></script>
     <script>
         function handlePerfilChange() {
             const perfil = document.getElementById('tipo_perfil').value;
@@ -226,7 +236,7 @@ $flashMessage = getFlashMessage();
             formatPhone(this);
         });
 
-        // Validar senhas
+        // Validar senhas e documento
         document.getElementById('formCadastro').addEventListener('submit', function(e) {
             const senha = document.getElementById('senha').value;
             const confirmar = document.getElementById('confirmar_senha').value;
@@ -234,6 +244,12 @@ $flashMessage = getFlashMessage();
             if (senha !== confirmar) {
                 e.preventDefault();
                 alert('As senhas não coincidem!');
+                return false;
+            }
+
+            // Validar documento (CPF/CNPJ)
+            if (!validarFormularioCadastro()) {
+                e.preventDefault();
                 return false;
             }
         });

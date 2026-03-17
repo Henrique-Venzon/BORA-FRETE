@@ -125,3 +125,26 @@ VALUES (1, 'van', NULL, 'Renault Kangoo Z.E.', 2023, 'BFA-5678', 800.00, 4.50, 4
 -- ========================================
 -- FIM DO SCRIPT
 -- ========================================
+
+-- ========================================
+-- TABELA: notificacoes
+-- ========================================
+CREATE TABLE IF NOT EXISTS notificacoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    tipo ENUM('oferta', 'veiculo', 'mensagem', 'alerta', 'sucesso', 'info') DEFAULT 'info',
+    titulo VARCHAR(255) NOT NULL,
+    mensagem TEXT NOT NULL,
+    lida BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    INDEX idx_usuario (usuario_id),
+    INDEX idx_lida (lida),
+    INDEX idx_created (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Inserir notificações de exemplo
+INSERT INTO notificacoes (usuario_id, tipo, titulo, mensagem) VALUES
+(1, 'sucesso', 'Bem-vindo ao BoraFrete!', 'Sua conta foi criada com sucesso. Complete seu perfil para começar.'),
+(1, 'info', 'Nova oferta disponível', 'Há uma nova oferta de frete de São Paulo para Rio de Janeiro.'),
+(2, 'oferta', 'Oferta aceita', 'Sua oferta foi visualizada por 5 motoristas.');

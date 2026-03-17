@@ -7,8 +7,13 @@
         </div>
     </footer>
 
+    <script>
+        const BASE_URL = '<?php echo BASE_URL; ?>';
+    </script>
     <script src="<?php echo BASE_URL; ?>public/js/main.js"></script>
     <script src="<?php echo BASE_URL; ?>public/js/ibge.js"></script>
+    <script src="<?php echo BASE_URL; ?>public/js/validacao.js"></script>
+    <script src="<?php echo BASE_URL; ?>public/js/notificacoes.js"></script>
     <?php if (isset($extraScripts)): ?>
         <?php echo $extraScripts; ?>
     <?php endif; ?>
