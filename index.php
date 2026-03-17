@@ -25,7 +25,7 @@ $pageTitle = 'Login';
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
 
@@ -73,7 +73,7 @@ $pageTitle = 'Login';
             </div>
         <?php endif; ?>
 
-        <form action="<?php echo BASE_URL; ?>/processamento/login.php" method="POST">
+        <form action="processamento/login.php" method="POST">
             <div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required>
@@ -90,7 +90,7 @@ $pageTitle = 'Login';
         </form>
 
         <div class="login-footer">
-            <p>Não tem uma conta? <a href="<?php echo BASE_URL; ?>/perfil.php">Cadastre-se aqui</a></p>
+            <p>Não tem uma conta? <a href="perfil.php">Cadastre-se aqui</a></p>
         </div>
     </div>
 </div>

@@ -38,18 +38,18 @@ define('DB_USER', 'root');           // Usuário do MySQL
 define('DB_PASS', 'sua_senha');      // Senha do MySQL
 
 // URL Base do Sistema
-define('BASE_URL', 'http://localhost');
+define('BASE_URL', 'http://localhost:8000');
 ```
 
 **IMPORTANTE:** Ajuste o `BASE_URL` conforme seu ambiente:
-- Desenvolvimento local: `http://localhost:80`
+- Desenvolvimento local: `http://localhost:8000`
 - Servidor: `https://seudominio.com.br`
 
 ## Passo 3: Executar o Sistema
 
 ### Opção A: PHP Built-in Server (Desenvolvimento)
 ```bash
-php -S localhost
+php -S localhost:8000
 ```
 
 Ou usando npm:
@@ -57,7 +57,7 @@ Ou usando npm:
 npm start
 ```
 
-Acesse: `http://localhost`
+Acesse: `http://localhost:8000`
 
 ### Opção B: Apache
 

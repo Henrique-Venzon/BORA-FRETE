@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // ================================================================
 // CONSTANTES DO SISTEMA
 // ================================================================
-define('BASE_URL', 'http://localhost');
+define('BASE_URL', '');
 define('SITE_NAME', 'FreteBras');
 define('SITE_DESCRIPTION', 'Sistema de Gestão Logística');
 define('SITE_VERSION', '1.0.0');
@@ -22,7 +22,7 @@ define('SITE_VERSION', '1.0.0');
 // CONFIGURAÇÕES DE BANCO DE DADOS
 // ================================================================
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'logistica_db');
+define('DB_NAME', 'fretelog');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');

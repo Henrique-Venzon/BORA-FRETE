@@ -24,7 +24,7 @@ include 'views/layout/header.php';
 
 <div class="row mb-3">
     <div class="col-md-12">
-        <a href="<?php echo BASE_URL; ?>/cadastro-oferta.php" class="btn btn-primary">
+        <a href="cadastro-oferta.php" class="btn btn-primary">
             <i class="fas fa-plus"></i> Cadastrar Nova Oferta
         </a>
     </div>
@@ -139,7 +139,7 @@ include 'views/layout/header.php';
                         <i class="fas fa-box" style="font-size: 64px; color: var(--text-light); margin-bottom: 20px;"></i>
                         <h4 style="color: var(--text-color); margin-bottom: 10px;">Nenhuma oferta cadastrada</h4>
                         <p style="color: var(--text-light); margin-bottom: 24px;">Cadastre sua primeira oferta de carga e comece a receber propostas.</p>
-                        <a href="<?php echo BASE_URL; ?>/cadastro-oferta.php" class="btn btn-primary">
+                        <a href="cadastro-oferta.php" class="btn btn-primary">
                             <i class="fas fa-plus"></i> Cadastrar Primeira Oferta
                         </a>
                     </div>

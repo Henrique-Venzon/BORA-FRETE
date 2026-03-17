@@ -13,7 +13,7 @@
 <!-- Scripts Customizados -->
 <?php if (isset($customScripts) && is_array($customScripts)): ?>
     <?php foreach ($customScripts as $script): ?>
-        <script src="<?php echo BASE_URL; ?>/public/js/<?php echo $script; ?>"></script>
+        <script src="public/js/<?php echo $script; ?>"></script>
     <?php endforeach; ?>
 <?php endif; ?>
 

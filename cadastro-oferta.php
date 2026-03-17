@@ -29,7 +29,7 @@ include 'views/layout/header.php';
                     </div>
                 <?php endif; ?>
 
-                <form action="<?php echo BASE_URL; ?>/processamento/salvar-oferta.php" method="POST" id="formOferta">
+                <form action="processamento/salvar-oferta.php" method="POST" id="formOferta">
 
                     <h5 class="mb-3">Informações Básicas</h5>
 
@@ -201,7 +201,7 @@ include 'views/layout/header.php';
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Salvar Oferta
                         </button>
-                        <a href="<?php echo BASE_URL; ?>/dashboard.php" class="btn btn-secondary">
+                        <a href="dashboard.php" class="btn btn-secondary">
                             <i class="fas fa-times"></i> Cancelar
                         </a>
                     </div>

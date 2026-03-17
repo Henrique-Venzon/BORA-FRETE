@@ -33,7 +33,7 @@ if ($editMode) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
 <div class="page-content" style="padding: 40px 20px;">
@@ -55,7 +55,7 @@ if ($editMode) {
                         <?php if (!$editMode): ?>
                             <script>
                                 setTimeout(function() {
-                                    window.location.href = '<?php echo BASE_URL; ?>/index.php?sucesso=cadastro';
+                                    window.location.href = 'index.php?sucesso=cadastro';
                                 }, 3000);
                             </script>
                         <?php endif; ?>
@@ -85,7 +85,7 @@ if ($editMode) {
                     </div>
                 <?php endif; ?>
 
-                <form action="<?php echo BASE_URL; ?>/processamento/salvar-perfil.php" method="POST" id="formPerfil">
+                <form action="processamento/salvar-perfil.php" method="POST" id="formPerfil">
 
                     <?php if ($editMode): ?>
                         <input type="hidden" name="edit_mode" value="1">
@@ -220,11 +220,11 @@ if ($editMode) {
                             <i class="fas fa-save"></i> <?php echo $editMode ? 'Atualizar Perfil' : 'Cadastrar'; ?>
                         </button>
                         <?php if ($editMode): ?>
-                            <a href="<?php echo BASE_URL; ?>/dashboard.php" class="btn btn-secondary">
+                            <a href="dashboard.php" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Cancelar
                             </a>
                         <?php else: ?>
-                            <a href="<?php echo BASE_URL; ?>/index.php" class="btn btn-secondary">
+                            <a href="index.php" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Voltar para Login
                             </a>
                         <?php endif; ?>
@@ -242,8 +242,8 @@ if ($editMode) {
     include 'views/layout/footer.php';
 } else {
     echo '</div>';
-    echo '<script src="' . BASE_URL . '/public/js/ibge-api.js"></script>';
-    echo '<script src="' . BASE_URL . '/public/js/perfil-form.js"></script>';
+    echo '<script src="public/js/ibge-api.js"></script>';
+    echo '<script src="public/js/perfil-form.js"></script>';
     echo '</body></html>';
 }
 ?>

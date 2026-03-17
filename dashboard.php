@@ -86,22 +86,22 @@ include 'views/layout/header.php';
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <a href="<?php echo BASE_URL; ?>/cadastro-veiculo.php" class="btn btn-primary w-100">
+                        <a href="cadastro-veiculo.php" class="btn btn-primary w-100">
                             <i class="fas fa-truck"></i> Cadastrar Veículo
                         </a>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <a href="<?php echo BASE_URL; ?>/cadastro-oferta.php" class="btn btn-primary w-100">
+                        <a href="cadastro-oferta.php" class="btn btn-primary w-100">
                             <i class="fas fa-box"></i> Cadastrar Oferta
                         </a>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <a href="<?php echo BASE_URL; ?>/buscar-fretes.php" class="btn btn-secondary w-100">
+                        <a href="buscar-fretes.php" class="btn btn-secondary w-100">
                             <i class="fas fa-search"></i> Buscar Fretes
                         </a>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <a href="<?php echo BASE_URL; ?>/propostas.php" class="btn btn-secondary w-100">
+                        <a href="propostas.php" class="btn btn-secondary w-100">
                             <i class="fas fa-handshake"></i> Ver Propostas
                         </a>
                     </div>
@@ -177,7 +177,7 @@ include 'views/layout/header.php';
                     <div class="text-center text-light" style="padding: 40px;">
                         <i class="fas fa-inbox" style="font-size: 48px; color: var(--text-light); margin-bottom: 16px;"></i>
                         <p style="color: var(--text-light);">Você ainda não possui ofertas cadastradas.</p>
-                        <a href="<?php echo BASE_URL; ?>/cadastro-oferta.php" class="btn btn-primary">
+                        <a href="cadastro-oferta.php" class="btn btn-primary">
                             <i class="fas fa-plus"></i> Cadastrar Primeira Oferta
                         </a>
                     </div>

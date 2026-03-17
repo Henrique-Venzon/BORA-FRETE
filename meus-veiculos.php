@@ -24,7 +24,7 @@ include 'views/layout/header.php';
 
 <div class="row mb-3">
     <div class="col-md-12">
-        <a href="<?php echo BASE_URL; ?>/cadastro-veiculo.php" class="btn btn-primary">
+        <a href="cadastro-veiculo.php" class="btn btn-primary">
             <i class="fas fa-plus"></i> Cadastrar Novo Veículo
         </a>
     </div>
@@ -108,7 +108,7 @@ include 'views/layout/header.php';
                         <i class="fas fa-truck" style="font-size: 64px; color: var(--text-light); margin-bottom: 20px;"></i>
                         <h4 style="color: var(--text-color); margin-bottom: 10px;">Nenhum veículo cadastrado</h4>
                         <p style="color: var(--text-light); margin-bottom: 24px;">Comece cadastrando seu primeiro veículo para receber propostas de frete.</p>
-                        <a href="<?php echo BASE_URL; ?>/cadastro-veiculo.php" class="btn btn-primary">
+                        <a href="cadastro-veiculo.php" class="btn btn-primary">
                             <i class="fas fa-plus"></i> Cadastrar Primeiro Veículo
                         </a>
                     </div>

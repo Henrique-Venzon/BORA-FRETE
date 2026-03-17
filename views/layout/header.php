@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
 
@@ -33,7 +33,7 @@
             </div>
 
             <nav class="sidebar-menu">
-                <a href="<?php echo BASE_URL; ?>/dashboard.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'dashboard.php') ? 'active' : ''; ?>">
+                <a href="dashboard.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'dashboard.php') ? 'active' : ''; ?>">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
@@ -42,17 +42,17 @@
 
                 <div class="menu-title">Cadastros</div>
 
-                <a href="<?php echo BASE_URL; ?>/perfil.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'perfil.php') ? 'active' : ''; ?>">
+                <a href="perfil.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'perfil.php') ? 'active' : ''; ?>">
                     <i class="fas fa-user"></i>
                     <span>Meu Perfil</span>
                 </a>
 
-                <a href="<?php echo BASE_URL; ?>/cadastro-veiculo.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'cadastro-veiculo.php') ? 'active' : ''; ?>">
+                <a href="cadastro-veiculo.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'cadastro-veiculo.php') ? 'active' : ''; ?>">
                     <i class="fas fa-truck"></i>
                     <span>Cadastrar Veículo</span>
                 </a>
 
-                <a href="<?php echo BASE_URL; ?>/cadastro-oferta.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'cadastro-oferta.php') ? 'active' : ''; ?>">
+                <a href="cadastro-oferta.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'cadastro-oferta.php') ? 'active' : ''; ?>">
                     <i class="fas fa-box"></i>
                     <span>Cadastrar Oferta</span>
                 </a>
@@ -61,29 +61,29 @@
 
                 <div class="menu-title">Gestão</div>
 
-                <a href="<?php echo BASE_URL; ?>/meus-veiculos.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'meus-veiculos.php') ? 'active' : ''; ?>">
+                <a href="meus-veiculos.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'meus-veiculos.php') ? 'active' : ''; ?>">
                     <i class="fas fa-list"></i>
                     <span>Meus Veículos</span>
                 </a>
 
-                <a href="<?php echo BASE_URL; ?>/minhas-ofertas.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'minhas-ofertas.php') ? 'active' : ''; ?>">
+                <a href="minhas-ofertas.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'minhas-ofertas.php') ? 'active' : ''; ?>">
                     <i class="fas fa-clipboard-list"></i>
                     <span>Minhas Ofertas</span>
                 </a>
 
-                <a href="<?php echo BASE_URL; ?>/buscar-fretes.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'buscar-fretes.php') ? 'active' : ''; ?>">
+                <a href="buscar-fretes.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'buscar-fretes.php') ? 'active' : ''; ?>">
                     <i class="fas fa-search"></i>
                     <span>Buscar Fretes</span>
                 </a>
 
-                <a href="<?php echo BASE_URL; ?>/propostas.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'propostas.php') ? 'active' : ''; ?>">
+                <a href="propostas.php" class="menu-item <?php echo (basename($_SERVER['PHP_SELF']) == 'propostas.php') ? 'active' : ''; ?>">
                     <i class="fas fa-handshake"></i>
                     <span>Propostas</span>
                 </a>
 
                 <div class="menu-separator"></div>
 
-                <a href="<?php echo BASE_URL; ?>/processamento/logout.php" class="menu-item">
+                <a href="processamento/logout.php" class="menu-item">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Sair</span>
                 </a>
