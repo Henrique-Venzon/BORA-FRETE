@@ -148,3 +148,82 @@ INSERT INTO notificacoes (usuario_id, tipo, titulo, mensagem) VALUES
 (1, 'sucesso', 'Bem-vindo ao BoraFrete!', 'Sua conta foi criada com sucesso. Complete seu perfil para começar.'),
 (1, 'info', 'Nova oferta disponível', 'Há uma nova oferta de frete de São Paulo para Rio de Janeiro.'),
 (2, 'oferta', 'Oferta aceita', 'Sua oferta foi visualizada por 5 motoristas.');
+
+-- Adicionar colunas de geolocalização
+ALTER TABLE usuarios
+ADD COLUMN IF NOT EXISTS latitude DECIMAL(10, 8),
+ADD COLUMN IF NOT EXISTS longitude DECIMAL(11, 8),
+ADD COLUMN IF NOT EXISTS ultima_localizacao TIMESTAMP,
+ADD COLUMN IF NOT EXISTS notif_ofertas BOOLEAN DEFAULT TRUE,
+ADD COLUMN IF NOT EXISTS notif_mensagens BOOLEAN DEFAULT TRUE,
+ADD COLUMN IF NOT EXISTS notif_sistema BOOLEAN DEFAULT TRUE;
+
+-- Adicionar colunas de geolocalização para ofertas
+ALTER TABLE ofertas
+ADD COLUMN IF NOT EXISTS origem_lat DECIMAL(10, 8),
+ADD COLUMN IF NOT EXISTS origem_lng DECIMAL(11, 8),
+ADD COLUMN IF NOT EXISTS destino_lat DECIMAL(10, 8),
+ADD COLUMN IF NOT EXISTS destino_lng DECIMAL(11, 8);
+
+-- Tabela de mensagens/chat
+CREATE TABLE IF NOT EXISTS mensagens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    remetente_id INT NOT NULL,
+    destinatario_id INT NOT NULL,
+    oferta_id INT,
+    mensagem TEXT NOT NULL,
+    lida BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (remetente_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (destinatario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (oferta_id) REFERENCES ofertas(id) ON DELETE SET NULL,
+    INDEX idx_remetente (remetente_id),
+    INDEX idx_destinatario (destinatario_id),
+    INDEX idx_oferta (oferta_id),
+    INDEX idx_lida (lida)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabela de matchings (Cargas compatíveis)
+CREATE TABLE IF NOT EXISTS matchings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    oferta_id INT NOT NULL,
+    motorista_id INT NOT NULL,
+    score INT DEFAULT 0 COMMENT 'Pontuação de compatibilidade (0-100)',
+    distancia_km DECIMAL(10, 2),
+    notificado BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (oferta_id) REFERENCES ofertas(id) ON DELETE CASCADE,
+    FOREIGN KEY (motorista_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_match (oferta_id, motorista_id),
+    INDEX idx_oferta (oferta_id),
+    INDEX idx_motorista (motorista_id),
+    INDEX idx_score (score DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Sistema de Avaliações/Rating
+CREATE TABLE IF NOT EXISTS avaliacoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    motorista_id INT NOT NULL,
+    avaliador_id INT NOT NULL,
+    oferta_id INT,
+    nota INT NOT NULL CHECK (nota >= 1 AND nota <= 5),
+    pontualidade INT CHECK (pontualidade >= 1 AND pontualidade <= 5),
+    comentario TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (motorista_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (avaliador_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (oferta_id) REFERENCES ofertas(id) ON DELETE SET NULL,
+    INDEX idx_motorista (motorista_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Adicionar colunas de rating e disponibilidade
+ALTER TABLE usuarios
+ADD COLUMN IF NOT EXISTS rating_medio DECIMAL(3, 2) DEFAULT 5.00,
+ADD COLUMN IF NOT EXISTS total_avaliacoes INT DEFAULT 0,
+ADD COLUMN IF NOT EXISTS total_entregas INT DEFAULT 0,
+ADD COLUMN IF NOT EXISTS total_cancelamentos INT DEFAULT 0,
+ADD COLUMN IF NOT EXISTS disponivel_agora BOOLEAN DEFAULT FALSE;
+
+-- Criar índice para busca de motoristas disponíveis
+CREATE INDEX IF NOT EXISTS idx_disponivel_agora ON usuarios(disponivel_agora);
+CREATE INDEX IF NOT EXISTS idx_rating ON usuarios(rating_medio DESC);
